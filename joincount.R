@@ -9,14 +9,14 @@ library(spdep)
 
 species <- read.csv("Data/species.csv")
 
-data6 <- readOGR("Output/T6_J.shp")
+data <- readOGR("Data/Field Edits/T6_4_11_2017.shp")
 data5 <- readOGR("Output/T5_J.shp")
 data4 <- readOGR("Output/T4_J.shp")
 data.sp$Width <- as.numeric(as.character((data$Width)))
 
 data$sp_simp <- as.factor(data$sp_simp)
 data$Type <- as.factor(data$Type)
-
+data6 <- data
 jc.results <- matrix(data = NA, nrow = 1, ncol = 4)
 r <- jc(data4, 2, data4$sp_simp)
 jc.results <- rbind(r, jc.results)
@@ -39,7 +39,7 @@ jc.results.T6 <- mutate(jc.results.T6, p = 2*pnorm(-abs(`z.value`)), transect = 
 
 results <- rbind(jc.results.T4, jc.results.T5, jc.results.T6)
 
-write.csv(results, "results.csv")
+write.csv(jc.results.T6, "results.csv")
 write.csv(results, "JoinCount2neigh.csv")
 
 
