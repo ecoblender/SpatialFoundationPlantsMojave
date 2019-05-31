@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(XLConnect)\nlibrary(dplyr)\nlibrary(classInt)\nlibrary(ggplot2)\nlibrary(rtf)\nlibrary(ggthemes)\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(reshape)\n\n\nwb <- loadWorkbook(\"Data/facilitation.scale.review.xlsx\")\ndata <- readWorksheet(wb, \"final.data\", header = TRUE)\n\n#counts <- select(data, floral.neighbourhood:sequential)\n#counts <- apply(counts, 2, function(x) gsub(\"y\", \"1\", x))\n#counts <- apply(counts, 2, function(x) gsub(\"n\", \"0\", x))\n#counts <- apply(counts, 2, function(x) as.numeric(x))\n#counts <- as.data.frame(na.omit(counts))\n#counts <- summarise_all(counts, funs(sum))\n\ncounts <- gather(counts, \"Hypothesis\", \"Count\", 1:8)\n\ncounts <- transform(counts, Hypothesis = reorder(Hypothesis, -Count))\nggplot(counts, aes(Hypothesis, Count)) + geom_bar(stat = \"identity\")\nggplot(counts, aes(Hypothesis, Count)) + geom_bar()\n\n#turn y and n to numbers\ncounting <- apply(data[40:47], 2, function(x) gsub(\"y\", \"1\", x))\ncounting <- apply(counting, 2, function(x) gsub(\"n\", \"0\", x))\ndata <-cbind(data, counting)\ndata <- data[-c(40:47)]\n\n#get counts for each row and bind to dataframe\nnum.data <- apply(data[60:67], 2, function(x) as.numeric(x))\ndata <-cbind(data, num.data)\ndata <- data[-c(60:67)]\nsums <- rowSums(data[60:67])\ndata <- cbind(data, sums)\n\nggplot(data, aes(sums)) + geom_bar() + xlab(\"Number of Potential Mechanisms\") + ylab(\"Count\")\n\n\ntest <- gather(data, hypo, value, floral.neighbourhood:sequential)\ndata <- filter(test, value == 1)\n\nggplot(data, aes(hypo, fill = theme.simp)) + geom_bar()\nggplot(data, aes(hypo, fill = eco.simp)) + geom_bar()\nggplot(data, aes(hypo, fill = rel.scale.ordinal)) + geom_bar()\n\ndata$grain.cat <- factor(data$grain.cat, levels = c(\"small\", \"medium\", \"large\", \"verylarge\", \"NA\", \"NR\"))\nggplot(data, aes(hypo, fill = grain.cat)) + geom_bar()\n",
+    "created" : 1512779116056.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "154772743",
+    "id" : "35B8944A",
+    "lastKnownWriteTime" : 1508431406,
+    "last_content_update" : 1508431406,
+    "path" : "F:/School/Systematic Review/FacilitationScaleReview/Scripts/hypo.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

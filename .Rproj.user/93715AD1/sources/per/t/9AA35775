@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1523676407807.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2823456018",
+    "id" : "9AA35775",
+    "lastKnownWriteTime" : 1523677228,
+    "last_content_update" : 1523677227561,
+    "path" : "F:/School/ShrubMappingProject/ShrubMapping/joincount.R",
+    "project_path" : "joincount.R",
+    "properties" : {
+        "cursorPosition" : "11,50",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

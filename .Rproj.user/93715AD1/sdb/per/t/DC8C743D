@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(dplyr)\n\nall.data <- read.csv(\"Data/shrub.data.csv\")\n#extract each transect and map them \nt6 <- filter(all.data, Transect == \"6\")\nt5 <- filter(all.data, Transect == \"5\")\nt4 <- filter(all.data, Transect == \"4\")\n\n#t6 first quadrat 2 is 11.6m long\n# these are coordinates for first transect 622,565.377  3,849,067.992\nxt6 <- 622565.377\nyt6 <- 3849067.992\n\nxt6r <- xt6 - 10\nyt6.8r <- yt6 - 10\n\nt68r <- filter(t6, Quadrat == \"8R\") %>% mutate(., easting = xt6.8r + (X/100), northing = yt6.8r + Y/100)\n\nwrite.csv(t68r, \"Data/testmap.csv\")\n\n#kk let's try automating a lil bit\nquadrat\ntest <- matrix(16, 3)\ntest$quadrat<- c(\"8R\", \"8L\", \"7R\", \"7L\", \"6R\", \"6L\", \"5R\", \"5L\", \"4R\", \"4L\", \"3R\", \"3L\", \"2R\", \"2L\", \"1R\", \"1L\")\n\nt6 <- for(i in t6$ID){\n  if (t6$Quadrat == \"8R\"){\n    t6$xref <- 5\n  }}\n\napply(t6, 1, function(x)) \n  ",
+    "created" : 1512686850638.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "579624205",
+    "id" : "DC8C743D",
+    "lastKnownWriteTime" : 1512780900,
+    "last_content_update" : 1512780899532,
+    "path" : "F:/School/Shrub Mapping Project/ShrubMapping/Data/mapping.R",
+    "project_path" : "Data/mapping.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
